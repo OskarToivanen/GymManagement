@@ -21,13 +21,14 @@ namespace GymManagement
         {
             if (currentVisitors.Contains(customer.Name))
             {
-                logListBox.Items.Add($"{customer.Name} is already in the gym.");
+                AddLog($"{customer.Name} is already in the gym.");
                 return;
             }
 
             customer.VisitGym();
             visitors.Add(customer);
             currentVisitors.Add(customer.Name);
+            AddLog($"{customer.Name} has entered the gym.");
         }
 
         public void CustomerLeaves(Customer customer)
@@ -35,7 +36,19 @@ namespace GymManagement
             if (currentVisitors.Contains(customer.Name))
             {
                 currentVisitors.Remove(customer.Name);
-                logListBox.Items.Add($"{customer.Name} has left the gym.");
+                AddLog($"{customer.Name} has left the gym.");
+            }
+        }
+
+        private void AddLog(string message)
+        {
+            if (logListBox.InvokeRequired)
+            {
+                logListBox.Invoke(new Action<string>(AddLog), message);
+            }
+            else
+            {
+                logListBox.Items.Add(message);
             }
         }
 

@@ -109,6 +109,7 @@ namespace GymManagement
         private void SimulateBtn_Click(object sender, EventArgs e)
         {
             timer1.Start();
+            listBox1.Items.Add("---GYM IS OPEN---");
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -126,7 +127,15 @@ namespace GymManagement
         private int ticksPerHour = 60;
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (random.NextDouble() < 0.5) // 10% chance of a visit each tick
+            // Chance of a customer visiting the gym
+            if (random.NextDouble() < 0.1) // 10% chance
+            {
+                Customer randomCustomer = customers[random.Next(customers.Count)];
+                gymTraffic.RecordVisit(randomCustomer);
+            }
+
+            // Chance of a customer leaving the gym
+            if (random.NextDouble() < 0.05) // 5% chance
             {
                 if (gymTraffic.CurrentVisitors.Count > 0)
                 {
@@ -135,22 +144,21 @@ namespace GymManagement
                     Customer leavingCustomer = customers.First(c => c.Name == randomCustomerName);
                     gymTraffic.CustomerLeaves(leavingCustomer);
                 }
-                // Your logic for handling a gym visit
-                Customer randomCustomer = customers[random.Next(customers.Count)];
-                gymTraffic.RecordVisit(randomCustomer);
-                listBox1.Items.Add($"{randomCustomer.Name} visited your gym");
             }
 
+            labelVisitors.Text = $"Current Visitors: {gymTraffic.CurrentVisitors.Count}";
+
             ticks++;
+            progressBar1.Value = ticks;
             if (ticks % ticksPerHour == 0)
             {
                 hoursPassed++;
-                label1.Text = $"Simulation: {hoursPassed} hours passed.";
             }
 
             if (hoursPassed >= 1)
             {
-                simulationTimer.Stop();
+                timer1.Stop();
+                listBox1.Items.Add("---GYM CLOSED---");
                 MessageBox.Show("Simulation complete. Showing gym visitors:");
                 // Code to show gym visitors
             }
