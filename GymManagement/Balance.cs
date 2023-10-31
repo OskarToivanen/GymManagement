@@ -1,4 +1,6 @@
-﻿namespace GymManagement
+﻿using System;
+
+namespace GymManagement
 {
     internal class Balance
     {
@@ -6,7 +8,7 @@
         public float MonthlyIncome { get; private set; }
         private const double MonthlySubscription = 32.99;
 
-        private Expenses expenses;
+        private readonly Expenses expenses;
 
         public Balance(Expenses expenses)
         {
@@ -33,7 +35,7 @@
 
         public double EndOfMonthBalance()
         {
-            return MonthlyIncome - expenses.TotalCost();
+            return Math.Round(MonthlyIncome - expenses.TotalCost(), 2);
         }
 
         public override string ToString()

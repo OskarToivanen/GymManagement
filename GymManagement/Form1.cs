@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -8,13 +9,15 @@ namespace GymManagement
     public partial class Form1 : Form
     {
 
-        static Random random = new Random();
+        static readonly Random random = new Random();
         static GymTraffic gymTraffic;
         private readonly Expenses expenses = new Expenses();
         private readonly Balance balance;
         private readonly Timer simulationTimer = new Timer();
+        private readonly BindingList<FinancialData> financialDataList = new BindingList<FinancialData>();
+        private readonly BindingSource financialDataSource = new BindingSource();
 
-        static List<Customer> customers = new List<Customer>()
+        static readonly List<Customer> customers = new List<Customer>()
         {
             CreateCustomer("Oskar", "Apinakuja", "Kuopio"),
             CreateCustomer("Jane Doe", "Keskuskatu", "Helsinki"),
@@ -30,42 +33,6 @@ namespace GymManagement
             return new Customer(name, address, city);
         }
 
-        static void Simulate()
-        {
-            Console.WriteLine("Starting gym visit simulation for 8 hours...");
-
-            int hoursPassed = 0;
-            int ticksPerHour = 60; // You can adjust this based on your simulation speed
-            int totalTicks = 1 * ticksPerHour;
-
-            for (int tick = 0; tick < totalTicks; tick++)
-            {
-                if (random.NextDouble() < 0.1) // 10% chance of a visit each tick
-                {
-                    if (gymTraffic.CurrentVisitors.Count > 0)
-                    {
-                        int randomIndex = random.Next(gymTraffic.CurrentVisitors.Count);
-                        string randomCustomerName = gymTraffic.CurrentVisitors.ElementAt(randomIndex);
-                        Customer leavingCustomer = customers.First(c => c.Name == randomCustomerName);
-                        gymTraffic.CustomerLeaves(leavingCustomer);
-                    }
-                    Customer randomCustomer = customers[random.Next(customers.Count)];
-                    gymTraffic.RecordVisit(randomCustomer);
-                }
-
-                if (tick % ticksPerHour == 0 && tick != 0)
-                {
-                    hoursPassed++;
-                    Console.WriteLine($"Simulation: {hoursPassed} hours passed.");
-                }
-
-                System.Threading.Thread.Sleep(100); // Adjust as needed to control simulation speed
-            }
-
-            Console.WriteLine("Simulation complete. Showing gym visitors:");
-            gymTraffic.ShowVisitors();
-        }
-
         public Form1()
         {
             InitializeComponent();
@@ -73,10 +40,16 @@ namespace GymManagement
             simulationTimer.Interval = 100; // Adjust as needed to control simulation speed
             simulationTimer.Tick += SimulationTimer_Tick;
             gymTraffic = new GymTraffic(listBox1);
+            customers.ForEach(c => balance.AddSubscription());
+            // Set up the data source for the DataGridView
+            financialDataSource.DataSource = financialDataList;
+            dataGridView1.DataSource = financialDataSource;
+            FinancialData data = new FinancialData(balance);
+            financialDataList.Add(data);
         }
 
 
-        private void startSimulationButton_Click(object sender, EventArgs e)
+        private void StartSimulationButton_Click(object sender, EventArgs e)
         {
             simulationTimer.Start();
         }
@@ -112,20 +85,20 @@ namespace GymManagement
             listBox1.Items.Add("---GYM IS OPEN---");
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
         private int ticks = 0;
         private int hoursPassed = 0;
-        private int ticksPerHour = 60;
-        private void timer1_Tick(object sender, EventArgs e)
+        private readonly int ticksPerHour = 60;
+        private void Timer1_Tick(object sender, EventArgs e)
         {
             // Chance of a customer visiting the gym
             if (random.NextDouble() < 0.1) // 10% chance
@@ -164,7 +137,7 @@ namespace GymManagement
             }
         }
 
-        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        private void DataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
 
         }

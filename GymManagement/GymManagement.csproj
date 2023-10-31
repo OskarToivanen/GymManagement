@@ -50,6 +50,7 @@
     <Compile Include="CreateGym.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="Expenses.cs" />
+    <Compile Include="FinancialData.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

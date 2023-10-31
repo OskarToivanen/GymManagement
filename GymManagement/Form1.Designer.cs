@@ -66,17 +66,17 @@
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(288, 355);
             this.listBox1.TabIndex = 3;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.ListBox1_SelectedIndexChanged);
             // 
             // timer1
             // 
             this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer1.Tick += new System.EventHandler(this.Timer1_Tick);
             // 
             // labelVisitors
             // 
             this.labelVisitors.AutoSize = true;
-            this.labelVisitors.Location = new System.Drawing.Point(306, 12);
+            this.labelVisitors.Location = new System.Drawing.Point(175, 420);
             this.labelVisitors.Name = "labelVisitors";
             this.labelVisitors.Size = new System.Drawing.Size(76, 13);
             this.labelVisitors.TabIndex = 6;
@@ -92,17 +92,17 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(388, 12);
+            this.dataGridView1.Location = new System.Drawing.Point(425, 12);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(400, 355);
+            this.dataGridView1.Size = new System.Drawing.Size(696, 355);
             this.dataGridView1.TabIndex = 8;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellContentClick_1);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1133, 450);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.labelVisitors);
