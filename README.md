@@ -19,7 +19,7 @@ GymManagement is a Windows Forms application designed to simulate both the finan
 
 # Installation
 1. Clone the repository to your local machine.
-## Copy code
+### Copy code
 ```bash
 git clone https://github.com/your-username/GymManagement.git
 ```
