@@ -38,7 +38,6 @@ namespace GymManagement
             InitializeComponent();
             balance = new Balance(expenses);
             simulationTimer.Interval = 100; // Adjust as needed to control simulation speed
-            simulationTimer.Tick += SimulationTimer_Tick;
             gymTraffic = new GymTraffic(listBox1);
             customers.ForEach(c => balance.AddSubscription());
             // Set up the data source for the DataGridView
@@ -54,45 +53,10 @@ namespace GymManagement
             simulationTimer.Start();
         }
 
-        private void SimulationTimer_Tick(object sender, EventArgs e)
-        {
-            // Your simulation logic here
-            // Update the UI as needed
-
-            if (random.NextDouble() < 0.1) // 10% chance of a visit each tick
-            {
-                // Your logic for handling a gym visit
-            }
-
-            // Other simulation logic as needed
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-
-
-        private void ShowBalance_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void SimulateBtn_Click(object sender, EventArgs e)
         {
             timer1.Start();
             listBox1.Items.Add("---GYM IS OPEN---");
-        }
-
-        private void DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private int ticks = 0;
@@ -135,11 +99,6 @@ namespace GymManagement
                 MessageBox.Show("Simulation complete. Showing gym visitors:");
                 // Code to show gym visitors
             }
-        }
-
-        private void DataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }
