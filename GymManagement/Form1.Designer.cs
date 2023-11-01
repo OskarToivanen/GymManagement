@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.ShowBalance = new System.Windows.Forms.Button();
             this.SimulateBtn = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -38,16 +37,6 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // ShowBalance
-            // 
-            this.ShowBalance.Location = new System.Drawing.Point(94, 415);
-            this.ShowBalance.Name = "ShowBalance";
-            this.ShowBalance.Size = new System.Drawing.Size(75, 23);
-            this.ShowBalance.TabIndex = 1;
-            this.ShowBalance.Text = "Cashflow";
-            this.ShowBalance.UseVisualStyleBackColor = true;
-            this.ShowBalance.Click += new System.EventHandler(this.ShowBalance_Click);
             // 
             // SimulateBtn
             // 
@@ -76,7 +65,7 @@
             // labelVisitors
             // 
             this.labelVisitors.AutoSize = true;
-            this.labelVisitors.Location = new System.Drawing.Point(175, 420);
+            this.labelVisitors.Location = new System.Drawing.Point(94, 420);
             this.labelVisitors.Name = "labelVisitors";
             this.labelVisitors.Size = new System.Drawing.Size(76, 13);
             this.labelVisitors.TabIndex = 6;
@@ -91,10 +80,12 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(425, 12);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(696, 355);
+            this.dataGridView1.Size = new System.Drawing.Size(588, 355);
             this.dataGridView1.TabIndex = 8;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellContentClick_1);
             // 
@@ -102,15 +93,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1133, 450);
+            this.ClientSize = new System.Drawing.Size(1027, 450);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.labelVisitors);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.SimulateBtn);
-            this.Controls.Add(this.ShowBalance);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Gym Simulation";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
@@ -119,7 +109,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button ShowBalance;
         private System.Windows.Forms.Button SimulateBtn;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Timer timer1;

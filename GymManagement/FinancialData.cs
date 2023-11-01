@@ -14,7 +14,7 @@ namespace GymManagement
         public FinancialData(Balance balance)
         {
             Machines = GenerateMachines();
-            TotalMaintenanceCost = TotalMachineMaintenanceCost() * GenerateMachines();
+            TotalMaintenanceCost = Math.Round(TotalMachineMaintenanceCost() * GenerateMachines(), 2);
             CurrentBalance = (float)Math.Round(balance.CurrentBalance, 2);
             MonthlyIncome = (float)Math.Round(balance.MonthlyIncome, 2);
             EndOfMonthBalance = balance.EndOfMonthBalance();
@@ -29,7 +29,7 @@ namespace GymManagement
         public double TotalMachineMaintenanceCost()
         {
             double totalMachineMaintenanceCost = rand.NextDouble() * (20 - 10) + 10;
-            return Math.Round(totalMachineMaintenanceCost, 2);
+            return totalMachineMaintenanceCost;
         }
 
     }
